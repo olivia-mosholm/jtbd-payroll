@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Payroll JTBD Monitor
 
-## Getting Started
+A living overview of the Jobs-to-be-Done a payroll bookkeeper performs in
+e-conomic Payroll, with satisfaction and verbatim user insights per phase.
 
-First, run the development server:
+Built on the Ulwick Outcome-Driven Innovation framework:
+- 8 payroll phases mapped to the 8 universal job-map stages (Define → Conclude)
+- Each phase exposes Main Job, Sub Jobs, Related Jobs, Aspirations, Job Steps,
+  Outcomes, and User Insights
+- Proxy CSAT per phase (sentiment-derived from support + sales feedback) and
+  the official in-product CSAT survey at the top
+
+## Stack
+
+- Next.js 16 (App Router) + React 19
+- TypeScript
+- Tailwind CSS v4
+- Static-only — no API routes, no DB; all data lives in
+  [`lib/jobs-data.ts`](./lib/jobs-data.ts) and
+  [`lib/universal-stages.ts`](./lib/universal-stages.ts)
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Opens at http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build
+npm start
+```
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The project is a vanilla Next.js App Router app — no special config needed.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# from this directory
+vercel              # preview deployment
+vercel --prod       # production deployment
+```
+
+Or connect this folder as a project root in the Vercel dashboard. The build
+command (`next build`) and output are auto-detected.
+
+## Adding / updating data
+
+All content is statically typed and lives in `lib/jobs-data.ts`:
+
+- `jobs` — the 8 phases, each with `subJobs`, `relatedJobs`, `aspirations`,
+  `jobSteps`, `outcomes`, `insights`, and a `satisfaction` block
+- `surveyCsat` — the top-of-page CSAT card (in-product survey)
+- `insightsMeta` — methodology, caveats, and data-source attribution shown in
+  the footer
+
+To add a new insight, append to the relevant phase's `insights` array. The
+detail panel sorts them by `weight` (high → low) automatically.
+
+## Project layout
+
+```
+app/
+  layout.tsx         Root layout, fonts, metadata
+  page.tsx           Dashboard (header, summary cards, Jobs section, methodology)
+  globals.css        Tailwind + theme + animations
+components/
+  job-card.tsx       Phase card (cards view)
+  job-detail.tsx     Slide-in detail panel
+  universal-job-map.tsx  Universal map view
+  satisfaction.tsx   Ring gauge + NPS bar + history chart + top-pain box
+  illustrations.tsx  Inline SVGs for phase icons
+lib/
+  jobs-data.ts       All phase content + insights + satisfaction
+  universal-stages.ts Ulwick's 8 universal stages
+```
