@@ -77,6 +77,12 @@ export type IllustrationKey =
   | "archive"
   | "chat";
 
+export type JtbdStatement = {
+  when: string;
+  want: string;
+  soThat: string;
+};
+
 export type JobPhase = {
   id: string;
   number: number;
@@ -84,6 +90,7 @@ export type JobPhase = {
   shortTitle: string;
   description: string;
   mainJob: string;
+  jtbdStatement: JtbdStatement;
   universalStage: UniversalStageId;
   illustration: IllustrationKey;
   satisfaction: Satisfaction;
@@ -106,6 +113,11 @@ export const jobs: JobPhase[] = [
       "Ensure correct and up-to-date data is collected before payroll can be calculated.",
     mainJob:
       "Collect all relevant payroll data from employees, systems and processes so the foundation for the payroll run is complete and correct.",
+    jtbdStatement: {
+      when: "a new payroll period opens",
+      want: "collect every payroll input from clients, employees and systems",
+      soThat: "I have a complete, correct foundation to run payroll against",
+    },
     universalStage: "locate",
     illustration: "inbox",
     satisfaction: {
@@ -278,6 +290,11 @@ export const jobs: JobPhase[] = [
       "Quality-check collected data before it's used in the payroll run.",
     mainJob:
       "Ensure collected data is correct, complete and aligned with collective agreements, contracts and applicable legislation.",
+    jtbdStatement: {
+      when: "I've collected payroll data for a period",
+      want: "verify it's correct, complete and compliant with agreement and law",
+      soThat: "I can run payroll without errors or compliance fallout",
+    },
     universalStage: "confirm",
     illustration: "shield",
     satisfaction: {
@@ -463,6 +480,11 @@ export const jobs: JobPhase[] = [
     description: "Calculate and pay employees correctly and on time.",
     mainJob:
       "Run payroll so employees receive the right amount on the agreed date — every time.",
+    jtbdStatement: {
+      when: "validated payroll data is ready",
+      want: "calculate and release payroll for every employee",
+      soThat: "everyone is paid the right amount on the agreed date",
+    },
     universalStage: "execute",
     illustration: "play",
     satisfaction: {
@@ -642,6 +664,11 @@ export const jobs: JobPhase[] = [
     description: "Report payroll to authorities and settle contributions correctly.",
     mainJob:
       "Ensure all reporting and settlements to authorities, pension providers and other parties happen correctly and on time.",
+    jtbdStatement: {
+      when: "payroll has been paid out for the period",
+      want: "report and settle every contribution to authorities and providers",
+      soThat: "we stay compliant and capture every refund we're entitled to",
+    },
     universalStage: "execute",
     illustration: "send",
     satisfaction: {
@@ -807,6 +834,11 @@ export const jobs: JobPhase[] = [
       "Handle ongoing changes to payroll terms across the year.",
     mainJob:
       "Ensure every change to an employee's payroll terms is reflected correctly in payroll — from hire to termination.",
+    jtbdStatement: {
+      when: "an employee's payroll terms change",
+      want: "reflect that change correctly going forward and backward",
+      soThat: "every employee is paid fairly without retroactive surprises",
+    },
     universalStage: "modify",
     illustration: "sliders",
     satisfaction: {
@@ -995,6 +1027,11 @@ export const jobs: JobPhase[] = [
     description: "Post payroll components correctly in the company's books.",
     mainJob:
       "Ensure all payroll entries, offsetting accounts and reconciliations are reflected correctly in the books and can be documented.",
+    jtbdStatement: {
+      when: "payroll has been approved",
+      want: "post and reconcile the payroll entries in the books",
+      soThat: "month-end closes cleanly and the auditor has nothing to flag",
+    },
     universalStage: "conclude",
     illustration: "ledger",
     satisfaction: {
@@ -1153,6 +1190,11 @@ export const jobs: JobPhase[] = [
       "Document, archive and report payroll-related data.",
     mainJob:
       "Ensure all documentation is preserved, and that management and authorities receive the reports they need.",
+    jtbdStatement: {
+      when: "a payroll period is complete",
+      want: "archive the documentation and produce the right reports",
+      soThat: "we stay GDPR-compliant and give the business actionable insight",
+    },
     universalStage: "conclude",
     illustration: "archive",
     satisfaction: {
@@ -1290,6 +1332,11 @@ export const jobs: JobPhase[] = [
       "Answer questions from employees and act as the link to authorities.",
     mainJob:
       "Give employees, managers and authorities the right answers about pay, tax, pension and holiday pay — quickly and understandably.",
+    jtbdStatement: {
+      when: "an employee, manager or authority has a payroll question",
+      want: "give them a correct, understandable answer",
+      soThat: "they trust the process and don't have to ask again",
+    },
     universalStage: "monitor",
     illustration: "chat",
     satisfaction: {

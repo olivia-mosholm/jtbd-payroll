@@ -11,8 +11,6 @@ type Props = {
   index: number;
 };
 
-const CARD_ACCENT = "#ee4f4d";
-
 export function JobCard({ job, isActive, onClick, index }: Props) {
   const stage = universalStageById[job.universalStage];
   return (
@@ -26,16 +24,7 @@ export function JobCard({ job, isActive, onClick, index }: Props) {
         }`}
       style={{ animationDelay: `${index * 50}ms` }}
     >
-      {/* Unified top color band */}
-      <span
-        className="absolute left-0 right-0 top-0 h-1"
-        style={{ background: CARD_ACCENT, opacity: isActive ? 1 : 0.85 }}
-      />
-
       <div className="relative flex items-center gap-1.5">
-        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
-          Phase {String(job.number).padStart(2, "0")}
-        </span>
         <span
           className="inline-flex items-center gap-1 rounded-full border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider"
           style={{
@@ -52,7 +41,11 @@ export function JobCard({ job, isActive, onClick, index }: Props) {
         {job.title}
       </h3>
 
-      <p className="relative mt-3 line-clamp-2 text-[13px] leading-relaxed text-zinc-600">
+      <p className="relative mt-1 text-[11px] font-mono uppercase tracking-wider text-zinc-400">
+        {job.mainJob}
+      </p>
+
+      <p className="relative mt-2 line-clamp-2 text-[13px] leading-relaxed text-zinc-600">
         {job.description}
       </p>
 
